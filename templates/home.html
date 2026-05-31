@@ -1,111 +1,321 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Performance Prediction System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    display:flex;
+    justify-content:center;
+    padding:40px 20px;
+}
+
+.container{
+    width:100%;
+    max-width:1000px;
+}
+
+.card{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(18px);
+    border-radius:25px;
+    padding:40px;
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.header h1{
+    color:white;
+    font-size:2.4rem;
+    margin-bottom:10px;
+}
+
+.header p{
+    color:#e9e9e9;
+    font-size:1rem;
+}
+
+.author{
+    margin-top:15px;
+    display:inline-block;
+    padding:8px 18px;
+    background:white;
+    color:#4f46e5;
+    border-radius:30px;
+    font-weight:600;
+}
+
+.info-box{
+    background:rgba(255,255,255,0.15);
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:25px;
+    color:white;
+}
+
+.info-box h3{
+    margin-bottom:10px;
+}
+
+.tech-stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
+}
+
+.badge{
+    background:white;
+    color:#4f46e5;
+    padding:8px 15px;
+    border-radius:20px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    color:white;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+select,input{
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+.full{
+    grid-column:1/-1;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:white;
+    color:#4f46e5;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.result{
+    margin-top:25px;
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+}
+
+.result h3{
+    color:#666;
+    margin-bottom:10px;
+}
+
+.score{
+    font-size:3rem;
+    font-weight:700;
+    color:#4f46e5;
+}
+
+.footer{
+    margin-top:25px;
+    text-align:center;
+    color:white;
+    font-size:14px;
+}
+
+@media(max-width:768px){
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header h1{
+        font-size:1.8rem;
+    }
+
+    .card{
+        padding:25px;
+    }
+}
+
+</style>
+</head>
+
 <body>
-    <div class="login">
-       <h1>Student Exam Performance Indicator</h1>
-   
-       <form action="{{ url_for('predict_datapoint')}}" method="post">
-        <h1>
-            <legend>Student Exam Performance Prediction</legend>
-        </h1>
-        <div class="mb-3">
-            <label class="form-label">Gender</label>
-            <select class="form-control" name="gender" placeholder="Enter you Gender" required>
-                <option class="placeholder" selected disabled value="">Select your Gender</option>
-                <option value="male">
-                    Male
-                </option>
-                <option value="female">
-                    Female
-                </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Race or Ethnicity</label>
-            <select class="form-control" name="ethnicity" placeholder="Enter you ethnicity" required>
-                <option class="placeholder" selected disabled value="">Select Ethnicity</option>
-                <option value="group A">
-                    Group A
-                </option>
-                <option value="group B">
-                    Group B
-                </option>
-                <option value="group C">
-                    Group C
-                </option>
-                <option value="group D">
-                    Group D
-                </option>
-                <option value="group E">
-                    Group E
-                </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Parental Level of Education</label>
-            <select class="form-control" name="parental_level_of_education"
-                placeholder="Enter you Parent Education" required>
-                <option class="placeholder" selected disabled value="">Select Parent Education</option>
-                <option value="associate's degree">
-                    associate's degree
-                </option>
-                <option value="bachelor's degree">
-                    bachelor's degree
-                </option>
-                <option value="high school">
-                    high school
-                </option>
-                <option value="master's degree">
-                    master's degree
-                </option>
-                <option value="some college">
-                    some college
-                </option>
-                <option value="some high school">
-                    some high school
-                </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Lunch Type</label>
-            <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
-                <option class="placeholder" selected disabled value="">Select Lunch Type</option>
-                <option value="free/reduced">
-                    free/reduced
-                </option>
-                <option value="standard">
-                    standard
-                </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Test preparation Course</label>
-            <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
-                required>
-                <option class="placeholder" selected disabled value="">Select Test_course</option>
-                <option value="none">
-                    None
-                </option>
-                <option value="completed">
-                    Completed
-                </option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Writing Score out of 100</label>
-            <input class="form-control" type="number" name="reading_score"
-                placeholder="Enter your Reading score" min='0' max='100' />
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Reading Score out of 100</label>
-            <input class="form-control" type="number" name="writing_score"
-                placeholder="Enter your Reading Score" min='0' max='100' />
-        </div>
-        <div class="mb-3">
-            <input class="btn btn-primary" type="submit" value="Predict your Maths Score" required />
-        </div>
-    </form>
-    <h2>
-       THE  prediction is {{results}}
-    </h2>
-   <body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="header">
+    <h1>🎓 Student Performance Prediction System</h1>
+    <p>End-to-End Machine Learning Project using FastAPI & Scikit-Learn</p>
+
+    <div class="author">
+        Developed by Saurabh Kumar
+    </div>
+</div>
+
+<div class="info-box">
+    <h3>📌 Project Overview</h3>
+
+    <p>
+        This application predicts a student's Mathematics score using
+        demographic information, parental education level,
+        lunch type, test preparation status,
+        reading score and writing score.
+    </p>
+
+    <div class="tech-stack">
+        <span class="badge">Python</span>
+        <span class="badge">FastAPI</span>
+        <span class="badge">Scikit-Learn</span>
+        <span class="badge">Pandas</span>
+        <span class="badge">NumPy</span>
+        <span class="badge">Machine Learning</span>
+    </div>
+</div>
+
+<form action="/predictdata" method="post">
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Gender</label>
+<select name="gender" required>
+<option selected disabled value="">Select Gender</option>
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Race / Ethnicity</label>
+<select name="ethnicity" required>
+<option selected disabled value="">Select Ethnicity</option>
+<option value="group A">Group A</option>
+<option value="group B">Group B</option>
+<option value="group C">Group C</option>
+<option value="group D">Group D</option>
+<option value="group E">Group E</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Parental Education</label>
+<select name="parental_level_of_education" required>
+<option selected disabled value="">Select Education</option>
+<option value="associate's degree">Associate's Degree</option>
+<option value="bachelor's degree">Bachelor's Degree</option>
+<option value="high school">High School</option>
+<option value="master's degree">Master's Degree</option>
+<option value="some college">Some College</option>
+<option value="some high school">Some High School</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Lunch Type</label>
+<select name="lunch" required>
+<option selected disabled value="">Select Lunch Type</option>
+<option value="free/reduced">Free / Reduced</option>
+<option value="standard">Standard</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Test Preparation Course</label>
+<select name="test_preparation_course" required>
+<option selected disabled value="">Select Course Status</option>
+<option value="none">None</option>
+<option value="completed">Completed</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Reading Score</label>
+<input type="number"
+       name="writing_score"
+       min="0"
+       max="100"
+       placeholder="Enter Reading Score"
+       required>
+</div>
+
+<div class="form-group full">
+<label>Writing Score</label>
+<input type="number"
+       name="reading_score"
+       min="0"
+       max="100"
+       placeholder="Enter Writing Score"
+       required>
+</div>
+
+<div class="full">
+<button type="submit">
+🚀 Predict Maths Score
+</button>
+</div>
+
+</div>
+
+</form>
+
+{% if results %}
+<div class="result">
+    <h3>Predicted Mathematics Score</h3>
+    <div class="score">{{ results }}</div>
+</div>
+{% endif %}
+
+<div class="footer">
+    Built with ❤️ by Saurabh Kumar
+</div>
+
+</div>
+
+</div>
+
+</body>
 </html>
+
