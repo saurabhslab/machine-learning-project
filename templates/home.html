@@ -330,6 +330,12 @@ Scikit-Learn, XGBoost & CatBoost and deployed on Render Cloud.</p>
     <div class="score">{{ results }}</div>
 </div>
 {% endif %}
+{% if error %}
+<div class="result">
+    <h3>❌ Prediction Error</h3>
+    <p>{{ error }}</p>
+</div>
+{% endif %}
 
 <div class="footer">
     Built with ❤️ by Saurabh Kumar
