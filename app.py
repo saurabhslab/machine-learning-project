@@ -5,8 +5,8 @@ import uvicorn
 
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 
-app = FastAPI()
-
+application = FastAPI()
+app = application
 # Templates folder
 templates = Jinja2Templates(directory="templates")
 
