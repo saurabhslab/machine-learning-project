@@ -3,16 +3,16 @@ uvicorn==0.41.0
 jinja2==3.1.6
 python-multipart==0.0.30
 
-numpy==2.4.6
-pandas==3.0.2
-scipy==1.17.1
+numpy==1.24.4
+pandas==1.5.3
+scipy==1.10.1
 scikit-learn==1.2.1
 
-xgboost==3.2.0
-catboost==1.2.10
+xgboost==1.7.6
+catboost==1.2
 
-matplotlib==3.10.9
-seaborn==0.13.2
+matplotlib==3.7.5
+seaborn==0.12.2
 
-dill==0.4.1
-joblib==1.5.3
+dill==0.3.6
+joblib==1.2.0
