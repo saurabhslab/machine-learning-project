@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains an end-to-end machine learning project for predicting student math exam performance. The project includes data ingestion, preprocessing, model training, artifact persistence, and a Flask-based web application for inference.
+This repository contains an end-to-end machine learning project for predicting student math exam performance. The project includes data ingestion, preprocessing, model training, artifact persistence, and a FastAPI web application for inference.
 
 ## Key features
 
@@ -10,11 +10,11 @@ This repository contains an end-to-end machine learning project for predicting s
 - Data preprocessing with categorical encoding and scaling
 - Model training using multiple regressors and hyperparameter search
 - Model artifact saving to `artifacts/model.pkl` and `artifacts/preprocessor.pkl`
-- Flask web UI for single-student prediction
+- FastAPI web UI for single-student prediction
 
 ## Repository structure
 
-- `app.py` - Flask application entrypoint for the prediction UI
+- `app.py` - FastAPI application entrypoint for the prediction UI
 - `requirements.txt` - Python dependencies
 - `setup.py` - package metadata and install helper
 - `artifacts/` - saved model, preprocessor, and split datasets
@@ -25,7 +25,7 @@ This repository contains an end-to-end machine learning project for predicting s
     - `data_transformation.py` - preprocessing pipeline and transformer persistence
     - `model_trainer.py` - model selection, tuning, training, and saving
   - `pipeline/`
-    - `predict_pipeline.py` - inference pipeline used by Flask
+    - `predict_pipeline.py` - inference pipeline used by FastAPI
   - `exception.py` - custom exception handling
   - `logger.py` - logging configuration
   - `utils.py` - helpers for object persistence and model evaluation
@@ -64,7 +64,7 @@ This should create:
 
 ## Running the web app
 
-Start the Flask app:
+Start the FastAPI app:
 ```bash
 python app.py
 ```
@@ -74,6 +74,37 @@ Open your browser at:
 - `http://localhost:5001/`
 
 Use the form to enter student demographics and exam scores, then submit to get the predicted math score.
+
+## Deployment
+
+### Run locally
+
+The app supports the `PORT` environment variable:
+```bash
+export PORT=5001
+python app.py
+```
+
+### Run with Docker
+
+Build the image:
+```bash
+docker build -t student-performance-app .
+```
+
+Run the container:
+```bash
+docker run -p 5001:5001 student-performance-app
+```
+
+Then open:
+- `http://localhost:5001/`
+
+### Alternative Uvicorn command
+
+```bash
+PORT=5001 uvicorn app:app --host 0.0.0.0 --port 5001
+```
 
 ## Notes
 

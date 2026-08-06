@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -48,8 +50,8 @@ async def predict_datapoint(
             parental_level_of_education=parental_level_of_education,
             lunch=lunch,
             test_preparation_course=test_preparation_course,
-            reading_score=writing_score,
-            writing_score=reading_score
+            reading_score=reading_score,
+            writing_score=writing_score
         )
 
         pred_df = data.get_data_as_data_frame()
@@ -76,9 +78,10 @@ async def predict_datapoint(
 
 
 if __name__ == "__main__":
+    port = int(os.getenv("PORT", "5001"))
     uvicorn.run(
         "app:app",
         host="0.0.0.0",
-        port=5001,
-        reload=True
+        port=port,
+        reload=os.getenv("RELOAD", "false").lower() == "true"
     )
